@@ -79,13 +79,13 @@ sudo systemctl status elasticsearch
 On peut également vérifier que les requêtes vers Elasticsearch fonctionnent en utilisant la commande curl comme présenté ci-bas : 
 ```
 
-![Untitled](Installation%20de%20la%20stack%20ELK%20fb6b8efe43d248cb80b71bedbecea8fb/Untitled.png)
+![Untitled](img/img (1).png)
 
 ```bash
 curl -X GET "tp-hadoop-26:9200"
 ```
 
-![Untitled](Installation%20de%20la%20stack%20ELK%20fb6b8efe43d248cb80b71bedbecea8fb/Untitled%201.png)
+![Untitled](img/img (2).png)
 
 ## Installation de Logstash
 
@@ -103,7 +103,7 @@ Ensuite on paramètre Logstash pour qu’il puisse répondre à notre besoin, qu
 sudo nano /etc/logstash/conf.d/beats.conf
 ```
 
-![Untitled](Installation%20de%20la%20stack%20ELK%20fb6b8efe43d248cb80b71bedbecea8fb/Untitled%202.png)
+![Untitled](img/img (3).png)
 
 Dans la section `input`, on spécifie l’origine des données. Dans notre cas, ces données proviennent de packetbeat qui est défini plus tard dans ce rapport.
 
@@ -119,7 +119,7 @@ sudo systemctl enable logstash
 sudo systemctl status logstash
 ```
 
-![Untitled](Installation%20de%20la%20stack%20ELK%20fb6b8efe43d248cb80b71bedbecea8fb/Untitled%203.png)
+![Untitled](img/img (4).png)
 
 ## Installation de Kibana
 
@@ -152,11 +152,11 @@ sudo systemctl enable kibana
 sudo systemctl status kibana
 ```
 
-![Untitled](Installation%20de%20la%20stack%20ELK%20fb6b8efe43d248cb80b71bedbecea8fb/Untitled%204.png)
+![Untitled](img/img (5).png)
 
 En se connectant au navigateur, on peut observé l’écran d’accueil ci-dessous, qui confirme également le bon état des service et de la stack ELK
 
-![Untitled](Installation%20de%20la%20stack%20ELK%20fb6b8efe43d248cb80b71bedbecea8fb/Untitled%205.png)
+![Untitled](img/img (6).png)
 
 ## PacketBeat
 
@@ -242,13 +242,13 @@ A présent on peut définir les ressources de Packetbeat. La documentation offic
 packetbeat setup -e
 ```
 
-![Untitled](Installation%20de%20la%20stack%20ELK%20fb6b8efe43d248cb80b71bedbecea8fb/Untitled%206.png)
+![Untitled](img/img (7).png)
 
 A l’issue de cette commande, un index `packetbeat-*` par défaut est crée, sans pour autant contenir des données.
 
 Des dashboard sont également également chargé. Mais pour l’instant aucune donnée n’a été indexée et transférée par packetbeat. 
 
-![Untitled](Installation%20de%20la%20stack%20ELK%20fb6b8efe43d248cb80b71bedbecea8fb/Untitled%207.png)
+![Untitled](img/img (8).png)
 
 A ce moment, on peut écouter : 
 
@@ -269,7 +269,7 @@ sudo packetbeat -I maccdc2012_00000.pcap -t
 
 Le transfert est donc réalisé et on peut voir des beats arrivés dans elasticsearch.
 
-![Untitled](Installation%20de%20la%20stack%20ELK%20fb6b8efe43d248cb80b71bedbecea8fb/Untitled%208.png)
+![Untitled](img/img (9).png)
 
 Ceci confirme bien le bon fonctionnement de la stack ELK et la lecture de beat par Packetbeat.
 
@@ -279,7 +279,7 @@ A présent, il est possible de réaliser des analyses sur les beats importés da
 
 Dans le but d’assurer la sécurité de notre système, on peut s’intéresser à surveiller le débit de données échanger par jour par exemple. Dans ce use case, on suppose qu’on connait en moyenne la quantité de données échangées entre notre réseau et l’extérieur. Ainsi on peut déclarer comme anormal une situation dans laquelle un seuil serait dépassé. Dans notre dashboard, nous définissons donc comme premier indicateur de performance de notre système, la quantité de données envoyer envoyer par le réseau. Cet indicateur est celui présenté dans le coin haut-gauche du dashboard.
 
-![Untitled](Installation%20de%20la%20stack%20ELK%20fb6b8efe43d248cb80b71bedbecea8fb/Untitled%209.png)
+![Untitled](img/img (10).png)
 
 On constate dans cet exemple, un pic pour lequel la quantité de données échangées avoisine 1 KB. Dans cette exemple ce pic serait donc considéré comme une anomalie.
 
