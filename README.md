@@ -234,8 +234,6 @@ packetbeat test config -e
 
 La dernière ligne de résultat de cette commande : `Config OK`, indique bien que les configurations fonctionnent normalement.
 
-/mettre une image de Kibana sans que le setup de nous activer
-
 A présent on peut définir les ressources de Packetbeat. La documentation officiel précise que des ressources sont déjà prédéfinies et permettent un paring, une indexation et une visualisation des données. Afin de profiter de cela, nous activons ces ressources avec la commande ci-dessous, qui retourne également l’état du service Packetbeat
 
 ```bash
